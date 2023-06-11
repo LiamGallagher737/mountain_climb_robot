@@ -7,10 +7,15 @@ start:
   SBI DDRB, 0 ; set D8 as output lmf
   SBI DDRB, 1 ; set D9 as output lmb
   SBI DDRB, 4 ; set D12 as output rmf
-  SBI DDRB, 5 ; set D13 as output rmb
+  SBI DDRB, 6 ; set D13 as output rmb
 
   CBI DDRD, 6 ; set D6 as input sonar echo
   SBI DDRD, 7 ; set D7 as output sonar trig
+
+  CBI DDRD, 2 ; set D2 as input tilt
+
+  CBI DDRC, 4 ; set A4 as input tilt
+  CBI DDRC, 5 ; set A5 as input tilt
 
   RCALL forward
 loop:
@@ -35,10 +40,14 @@ start_timing:
 check_high:
   SBRS PORTD, 6
   RJMP check_high
+  CLR R20
+  OUT TCCR0B, R20 ; stop counter
   IN R20, TCNT0
-  LDI R21, 1000
+  LDI R21, 125
   CP R20, R21
   BRSH stop
+
+  ; road detection
 
   RJMP loop
 

@@ -2,8 +2,12 @@ extern "C" {
   void start();
 }
 
-void setup() {
+int main() {
   start();
 }
 
-void loop() { }
+// void setup() {
+//   start();
+// }
+
+// void loop() { }
