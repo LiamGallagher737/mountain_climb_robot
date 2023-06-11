@@ -27,6 +27,8 @@ The robot consists of the following sensors
 
 There are two light sensors positioned facing down on either side of the robot, as the road is grey the amount of light reflected back to the LDR is very different to the amount of light the green grass reflects. We can use this check if either side of the robot has gone off the road and into the grass, we can then correct this by turning in the opposite direction. The two sensors are read from analog pins `A4` and `A5`.
 
+![Light Sensor PCB](images/LightSensorPCB.png)
+
 ### Detecting Objects
 
 The HC-SR04 ultrasonic sensor is used to detect objects in front of the robot. This is done by first triggering the ultrasonic transmitter by sending a 10 microsecond high pulse on the `trig` pin.  This will emit a 40 kHz sound which travels through the air and bounces back when it hits an object. This reflected sound wave is then received by the ultrasonic receiver. To read the result of the scan we can wait for the `echo` pin to become high and then time how long it takes to become low again, this gives us the time in microseconds the echo took. We can then multiply this by the speed of sound in centimetres per microsecond which is 0.0343. This gives us the distance the round trip distance so to get just the distance from the robot to the object we must divide it by 2. I'm using digital pins 7 for `TRIG` and 6 for `ECHO`.
